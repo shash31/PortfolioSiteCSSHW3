@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shashwat Dudeja's Projects">
+    <meta name="keywords" content="Shashwat Dudeja, Projects, Portfolio">
+    <meta name="author" content="Shashwat Dudeja">
+
+    <title>Shash's Projects</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">About Me</a></li>
+          <li><a href="">Projects</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contact.html">Contact Me</a></li>
+          <li><a href="htmltags.html">HTML Tags</a></li>
+        </ul>
+      </nav>
+
+      <datalist id="site-sections">
+        <option value="Basketball">Basketball</option>
+        <option value="Lifting">Lifting</option>
+        <option value="Chess">Chess</option>            
+        <option value="Connect4 AI">Connect4 AI</option>
+        <option value="Tetris">Tetris</option>
+        <option value="About Me">About Me</option>
+        <option value="htmltags">HTML Tags</option>
+      </datalist>
+      
+      <search>
+        <form>
+          <input type="search" list="site-sections" placeholder="Search...">
+          <button type="submit">Search</button>
+        </form>
+        <p>Search the site for more information.</p>
+      </search>
+    </header>
+
+    <hr>
+
+    <main>
+      <h1>My Projects</h1>
+
+      <template id="project-entry">
+        <section>
+          <hgroup>
+            <h2>Project Title</h2>
+            <p>Short description of the project.</p>
+          </hgroup>
+
+          <h3>Demo Video</h3>
+          <video controls>
+            <source src="videos/demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <h3>Additional Information</h3>
+          <p>Here you can provide more details about the project, its features, and any other relevant information.</p>
+        </section>
+      </template>
+
+      <!-- <template id="project-entry"> -->
+      <section id="connect4">
+        <hgroup>
+          <h2>Connect4 AI</h2>
+          <p>A minimax algorithm that plays Connect4</p>
+        </hgroup>
+
+        <h3>Demo Video</h3>
+        <video controls>
+          <source src="videos/connect4-demo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <p>The full game can be found on my github. However here's the code for the minimax algorithm(the AI):</p>
+        <h3>Code</h3>
+        <details>
+          <summary>Click to view the code</summary>
+          <pre>
+import random
+from branches import Branch
+
+# Code minimax algorithm again but with
+# - more efficient way to store positions
+# - play moves towards the center if all have same score
+# !!(Check)!!
+# - play first few moves with set of principles, then after certain number of moves, start using minimax
+# -- Principles for first few moves
+# --- Play in middle column if you have first move
+# --- If user plays in middle column with first move, play in middle column on top of theirs
+# --- If user plays anywhere other than middle column with first move, play in middle column
+# or....  fuck it we ball
+# - make database of best 5-6 moves in beginning
+# Possible optimizations
+# - Remembering branches and reusing them for moves instead of going down same path over and over again
+# !!(Check)!!
+# - anticipate losing moves and cut off all branches
+# - better move exploration order
+# - Multithreading
+# - Transposition table
+# -
+
+
+# First few moves:
+# First player(blue):
+#  First move
+# - Always go middle first
+#  Second
+# - If yellow goes on top in middle, we go middle again and again until we're at 5th row
+# - If yellow goes 1st or 7th, we go middle again
+# - If yellow goes 2nd, 3rd or 5th, 6th, we go 6th or 2nd column respectively
+#
+# Second player(yellow):
+#  First move
+# - If user(blue) goes middle, drop on top of them in middle
+# - If blue goes in 2nd or 6th column, drop in 3rd or 5th column respectively
+# - If blue goes 1st, 3rd, 5th or 7th, then drop in middle
+# - So basically always middle, except for 2nd or 6th column
+#  Second
+# - If blue keeps going middle, keep going middle
+# - If blue had gone in 3rd or 5th on first move, then no matter where they go for second move, put in middle again
+# - If blue had gone in 1st or 7th on first move, unless they go on opposite side(1st or 7th) again, then put in middle
+# - If they do put on opposite sides, then place in 3rd or 5th column
+# (Above principles leave out some important stuff but I've implemented all of it)
+
+class Minimax:
+    def __init__(self, depth, player):
+        # blue = maximizing Player and yellow = minimizing Player
+        self.depth = depth
+        self.maximizingPlayer = True if player == 'blue' else False
+        self.side = 1 if self.maximizingPlayer else -1
+
+        self.moveno = 1.0
+        self.curpos = []
+        for i in range(6):
+            self.curpos.append([])
+            for j in range(7):
+                self.curpos[i].append(0)
+
+        self.basebranch = None
+        self.lastmove = -1
+
+    def getMove(self):
+        movecol = -1
+        if (self.moveno < 2.5) or ((self.moveno == 2.5) and (not self.maximizingPlayer)):
+            movecol = self.firsttwomoves()
+        else:
+            if self.basebranch == None:
+                print('making first base branch')
+                self.basebranch = Branch(self.curpos, self.maximizingPlayer, self.moveno)
+
+            self.basebranch.setScore(self.depth)
+            print('received score')
+            pscore = self.basebranch.getScore()
+            print(pscore)
+            bestmoves = []
+            print('printing children')
+            for child in self.basebranch.children:
+                pos = child.getPos()
+                for row in pos:
+                    print(row)
+                score = child.getScore()
+                print('score: ', score)
+                print()
+                if (score == pscore) or ((score != 0) and (score == pscore + self.side)):
+                    bestmoves.append(child)
+            # if some moves are evaluated the same, choose the one which is the most forcing i.e. doesn't leave the opponent a lot of choices
+            if len(bestmoves) > 1:
+                minchildren = 8
+                bestmove = None
+                for move in bestmoves:
+                    if len(move.children) < minchildren:
+                        minchildren = len(move.children)
+                        bestmove = move
+                bestmoves = [bestmove]
+
+            move = bestmoves[0].getPos()
+            for c in range(7):
+                for r in range(5, -1, -1):
+                    if (move[r][c] == 0) and (self.curpos[r][c] == 0):
+                        break
+                    elif move[r][c] != self.curpos[r][c]:
+                        movecol = c
+                        break
+                if movecol != -1:
+                    break
+
+            self.basebranch = bestmoves[0]
+            print('moved down to other branch')
+            # print(self.basebranch.getScore())
+            # print('printing basebranch children and scores')
+            # for child in self.basebranch.children:
+            #     pos = child.getPos()
+            #     for row in pos:
+            #         print(row)
+            #     print('game over: ', child.gameOver)
+            #     print(child.getScore())
+
+        # update curpos with move and moveno
+        self.updatePos(movecol, self.maximizingPlayer)
+        self.moveno += 0.5
+        # print move and score
+        print()
+        print(self.curpos)
+        print('move no: ', self.moveno)
+        print()
+
+        return movecol
+
+    def sendMove(self, c):
+        # update curpos and moveno
+        self.lastmove = c
+        self.updatePos(c, not self.maximizingPlayer)
+        self.moveno += 0.5
+
+        if self.basebranch != None:
+            # moving down one branch to current position
+            print('finding move in children')
+            for child in self.basebranch.children:
+                if self.curpos == child.getPos():
+                    self.basebranch = child
+                    print('moved down to current branch!!')
+                    break
+
+    def updatePos(self, c, player):
+        # update self.pos in column c with players move(if true then player is blue else player is yellow)
+        m = 1 if player == True else -1
+
+        for r in range(5, -1, -1):
+            if self.curpos[r][c] == 0:
+                self.curpos[r][c] = m
+                break
+
+    def firsttwomoves(self):
+        # Principles for first 2 moves
+        if self.moveno < 3:
+            if self.moveno < 2:
+                if self.maximizingPlayer:
+                    movecol = 3
+                else:
+                    if self.curpos[5][1] == 1:
+                        self.firstbmove = 1
+                        movecol = 2
+                    elif self.curpos[5][5] == 1:
+                        self.firstbmove = 5
+                        movecol = 4
+                    else:
+                        self.firstbmove = self.lastmove
+                        movecol = 3
+            else:
+                if self.maximizingPlayer:
+                    if self.lastmove == 0 or self.lastmove == 6 or self.lastmove == 3:
+                        movecol = 3
+                    elif self.lastmove == 1 or self.lastmove == 2:
+                        movecol = 5
+                    else:
+                        movecol = 1
+                else:
+                    if self.firstbmove == 3:
+                        if self.lastmove == 0 or self.lastmove == 6 or self.lastmove == 3:
+                            movecol = 3
+                        elif self.lastmove == 1 or self.lastmove == 4:
+                            movecol = 2
+                        elif self.lastmove == 5 or self.lastmove == 2:
+                            movecol = 4
+                    elif self.firstbmove == 1:
+                        if self.lastmove == 0 or self.lastmove == 2 or self.lastmove > 3:
+                            movecol = 2
+                        elif self.lastmove == 1:
+                            movecol = 1
+                        else:
+                            movecol = 3
+                    elif self.firstbmove == 5:
+                        if self.lastmove == 6 or self.lastmove == 4 or self.lastmove < 3:
+                            movecol = 4
+                        elif self.lastmove == 5:
+                            movecol = 5
+                        else:
+                            movecol = 3
+                    elif self.firstbmove == 0 or self.firstbmove == 6:
+                        if self.curpos[5][0] == 1 and self.curpos[5][6] == 1:
+                            movecol = 2
+                        else:
+                            movecol = 3
+                    elif self.firstbmove == 2 or self.firstbmove == 4:
+                        if self.curpos[5][2] == 1 and self.curpos[4][2] == 1:
+                            movecol = 2
+                        elif self.curpos[5][4] == 1 and self.curpos[4][4] == 1:
+                            movecol = 4
+                        else:
+                            movecol = 3
+
+        return movecol
+
+# testobj = Minimax(10, True)
+# pos = [[0, 0, 0, 0, 0, 0, 0],
+#        [0, 0, 0, 0, 0, 0, 0],
+#        [0, 0, 0, 0, 0, 0, 0],
+#        [0, 0, 0, 1, 0, 0, 0],
+#        [0, 0, 0, -1, 0, 0, 0],
+#        [0, 0, 1, 1, -1, 0, 0],]
+# children = testobj.makeChildren(pos, -1)
+# for child in children:
+#     for row in child:
+#         print(row)
+#     print()
+          </pre>
+        </details>
+      </section>
+  
+      <section id="tetris">
+        <hgroup>
+          <h2>Tetris</h2>
+          <p>A Tetris game built in <code>python</code> using <code>pygame</code></p>
+        </hgroup>
+
+        <h3>Photo of the game</h3>
+        <figure>
+          <img src="images/tetris.jpg" alt="A photo of the Tetris game" width="300" height="300">
+          <figcaption>Here's how the game looks</figcaption>
+        </figure>
+
+        <h3>Demo Video</h3>
+        <video controls>
+          <source src="videos/tetris-demo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </section>
+
+      <section id="#chessAI">
+        <hgroup>
+          <h2>Chess AI</h2>
+          <p>A chess AI that plays using a minimax algorithm with alpha-beta pruning</p>
+        </hgroup>
+
+        <h3>Demo Video</h3>
+        <video controls>
+          <source src="videos/chess-demo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <h3>Code</h3>
+      </section>
+    </main>
+
+    <hr>
+    
+    <footer>
+      <address>
+        7665 Palmilla Dr, La Jolla
+      </address>
+      <p>Phone number: <a href="tel:+(973)704-8190">+1 (973) 704-8190</a></p>
+      <p>Github: <a href="https://github.com/shashwatdudeja">https://github.com/shashwatdudeja</a></p>
+      <p>&copy; 2023 Shashwat Dudeja</p>
+    </footer>
+  </body>
+</html>

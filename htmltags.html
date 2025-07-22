@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Experimenting with various HTML tags">
+    <meta name="author" content="Shashwat Dudeja">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="helloworld.js"></script>
+    <title>Experiment section</title>
+</head>
+<body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">About Me</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contact.html">Contact Me</a></li>
+          <li><a href="">HTML Tags</a></li>
+        </ul>
+      </nav>
+
+      <datalist id="site-sections">
+        <option value="Basketball">Basketball</option>
+        <option value="Lifting">Lifting</option>
+        <option value="Chess">Chess</option>            
+        <option value="Connect4 AI">Connect4 AI</option>
+        <option value="Tetris">Tetris</option>
+        <option value="About Me">About Me</option>
+        <option value="htmltags">HTML Tags</option>
+      </datalist>
+      
+      <search>
+        <form>
+          <input type="search" list="site-sections" placeholder="Search...">
+          <button type="submit">Search</button>
+        </form>
+        <p>Search the site for more information.</p>
+      </search>
+    </header>
+    <hr>
+    <main>
+      
+      <hgroup>
+        <h1>Experimenting with HTML Tags</h1>
+        <p>These are a collection of HTML tags whose use I couldn't incorporate in the rest of the site</p>
+      </hgroup>
+
+      <section>
+        <h2>Drawing and Shapes</h2>
+        <div>
+          <h3>Canvas Drawing</h3>
+          <canvas>
+            <script>
+              const canvas = document.querySelector('canvas');
+              const ctx = canvas.getContext('2d');
+              ctx.fillStyle = 'green';
+              ctx.fillRect(10, 10, 100, 100);
+            </script>
+          </canvas>
+        </div>
+
+        <div>
+          <h2>SVG Shapes</h2>
+          <svg>
+            <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+            <rect x="100" y="20" width="150" height="100" style="fill:blue;stroke-width:2;stroke:black;" />
+          </svg>
+        </div>
+      
+      </section>
+
+      <section>
+        <p>Here's an audio recording of something</p>
+        <audio controls>
+          <source src="audio/sample.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </section>
+
+      <div>
+        <h2>Custom Elements</h2>
+        <custom-element>Messing around with CSS</custom-element>
+        <br>
+        <hello-world>This one prints hello world to the console.</hello-world>
+      </div>
+      <br>
+
+      <section>
+        <h2>Einstein's famous formula: </h2>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mi>E</mi>
+          <mo>=</mo>
+          <mi>m</mi>
+          <msup>
+            <mi>c</mi>
+            <mn>2</mn>
+          </msup>
+        </math>
+        <br> 
+        Developers couldn't make use of the MathML markup language as until recently, there was not a lot of browser support for interpreting it.
+        This is because it used to behave differently and was looked at as volatile and didn't pass certain tests according to the browsers.
+        <br>
+      </section>
+
+      <br>
+
+      <section>
+        <h2>Using the <code>abbr</code>, <code>dfn</code>, and <code>kbd</code> elements with a definition list(<code>dl</code>)</h2>
+        <dl>
+          <dt><code>abbr</code></dt>
+          <dd>
+            <p>Defines an abbreviation or acronym</p>
+            <p>Example: <abbr title="Hypertext Markup Language">HTML</abbr> stands for Hypertext Markup Language.</p>
+          </dd>
+
+          <dt><code>dfn</code></dt>
+          <dd>
+            <p>Defines a term</p>
+            <p>Example: <dfn>HTML</dfn> is a markup language for creating web pages.</p>
+          </dd>
+
+          <dt><code>kbd</code></dt>
+          <dd>
+            <p>Defines keyboard input</p>
+            <p>Example: Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy selected text.</p>
+          </dd>
+        </dl>
+      </section>
+
+      <dialog open>
+        <form method="dialog">
+          <p>This is inside a dialog</p>
+          <button value="cancel">Delete</button>
+          <button value="default">Delete</button>
+        </form>
+      </dialog>
+
+      <section>
+        <h2>Using some more html tags </h2>
+
+          <h3>Some deleted and updated text</h3>
+          <p>
+            <del>Deleted text</del>
+            <ins>Updated text</ins>
+          </p>
+          
+          <h3>Quoting something</h3>
+          <p>
+            <blockquote>Know thy opponent</blockquote>
+            <cite>Sun Tzu 1200</cite>
+          </p>
+      </section>
+
+      <section>
+        <h3>Example table</h3>
+        <table>
+          <caption>Table Caption</caption>
+
+          <colgroup>
+            <col span="1">
+            <col span="1">
+            <col span="1">
+          </colgroup>
+
+          <thead>
+            <tr>
+              <td></td>
+              <th scope="col">Column 1</th>
+              <th scope="col">Column 2</th>
+              <th scope="col">Column 3</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            <tr>
+                <th scope="row">Row 1</th>
+                <td>Data 1</td>
+                <td>Data 2</td>
+                <td>Data 3</td>
+            </tr>
+            <tr>
+              <th scope="row">Row 2</th>
+              <td>Data 4</td>
+              <td>Data 5</td>
+              <td>Data 6</td>
+            </tr>
+            <tr>
+              <th scope="row">Row 3</th>
+              <td>Data 7</td>
+              <td>Data 8</td>
+              <td>Data 9</td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td></td>
+              <td>Total 1</td>
+              <td>Total 2</td>
+              <td>Total 3</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <section>
+        <h2>Here's an embedded link to play tetris: </h2>
+        <iframe src="https://play.tetris.com" height="400" width="500" title="Tetris Game" loading="lazy"></iframe>
+      </section>
+
+      <section>
+        <h3>Progress Bar</h3>
+        <progress></progress>
+      </section>
+
+    </main>
+
+    <hr>
+
+    <footer>
+      <address>
+        7665 Palmilla Dr, La Jolla
+      </address>
+      <p>Phone number: <a href="tel:+(973)704-8190">+1 (973) 704-8190</a></p>
+      <p>Github: <a href="https://github.com/shashwatdudeja">https://github.com/shashwatdudeja</a></p>
+      <p>&copy; 2023 Shashwat Dudeja</p>
+    </footer>
+</body>
+</html>

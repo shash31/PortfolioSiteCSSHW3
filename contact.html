@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shash's Contact Information</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">About Me</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="">Contact Me</a></li>
+          <li><a href="htmltags.html">HTML Tags</a></li>
+        </ul>
+      </nav>
+
+      <datalist id="site-sections">
+        <option value="Basketball">Basketball</option>
+        <option value="Lifting">Lifting</option>
+        <option value="Chess">Chess</option>            
+        <option value="Connect4 AI">Connect4 AI</option>
+        <option value="Tetris">Tetris</option>
+        <option value="About Me">About Me</option>
+        <option value="htmltags">HTML Tags</option>
+      </datalist>
+      
+      <search>
+        <form>
+          <input type="search" list="site-sections" placeholder="Search...">
+          <button type="submit">Search</button>
+        </form>
+        <p>Search the site for more information.</p>
+      </search>
+    </header>
+    
+    <main>
+      <h1>Contact Me</h1>
+
+      <h2>My contact information</h2>
+      <ul>
+        <li>Email: <a href="mailto:shashwatdudeja@gmail.com">shashwatdudeja@gmail.com</a></li>
+        <li>Phone: <a href="tel:+(973)704-8190">+1 (973) 704-8190</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/shashwat-dudeja-123456789/">Shashwat Dudeja</a></li>
+        <li>Instagram: <a href="https://www.instagram.com/shashwatdudeja/">@shashwatdudeja</a></li>
+        <li>Discord: <a href="https://discordapp.com/users/shashwatdudeja#1234">shashwatdudeja#1234</a></li>
+      </ul>
+
+      <p>Alternatively, you can also fill out the form below to send me a message:</p>
+
+      <h2>Contact Form</h2>
+      <form action="mailto:shashwatdudeja@gmail.com" method="post">
+        <fieldset>
+          <legend>Subject</legend>
+
+          <label for="subject">Topic:</label>
+          <textarea id="subject" name="subject" placeholder="Enter the subject of your message here..."></textarea>
+
+        </fieldset>
+
+        <fieldset>
+          <legend>Your Contact Information</legend>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <br>
+          <label for="contact-method">Preferred contact method: </label>
+          <select id="contact-method" name="contact-method">
+            <optgroup label="Preferred">
+              <option value="Email">Email</option>
+              <option value="Text">Text</option>
+            </optgroup>
+            <optgroup label="Social media platforms">
+              <option value="Instagram">Instagram</option>
+              <option value="Discord">Discord</option>
+              <option value="LinkedIn">LinkedIn</option>
+            </optgroup>
+            <option value="Other">Other</option>
+          </select>
+          <br>
+          <p><strong>Note:</strong> Please provide your contact information in the field below so I could respond to your message.</p>
+          <label for="contact-info">Contact Information:</label>
+          <input type="text" id="contact-info" name="contact-info" required>
+        </fieldset>
+
+        <button>Submit</button>
+      </form>
+
+    </main>
+    
+    <footer>
+      <address>
+        7665 Palmilla Dr, La Jolla
+      </address>
+      <p>Phone number: <a href="tel:+(973)704-8190">+1 (973) 704-8190</a></p>
+      <p>&copy; 2023 Shashwat Dudeja</p>
+    </footer>
+  </body>
+</html>

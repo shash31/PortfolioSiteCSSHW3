@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shashwat Dudeja's Personal Portfolio Website">
+    <meta name="keywords" content="Shashwat Dudeja, Projects, Resume, Portfolio">
+    <meta name="author" content="Shashwat Dudeja">
+
+    <title>Shash's Portfolio site</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="">About Me</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="contact.html">Contact Me</a></li>
+          <li><a href="htmltags.html">HTML Tags</a></li>
+        </ul>
+      </nav>
+
+      <datalist id="site-sections">
+        <option value="Basketball">Basketball</option>
+        <option value="Lifting">Lifting</option>
+        <option value="Chess">Chess</option>            
+        <option value="Connect4 AI">Connect4 AI</option>
+        <option value="Tetris">Tetris</option>
+        <option value="About Me">About Me</option>
+        <option value="htmltags">HTML Tags</option>
+      </datalist>
+      
+      <search>
+        <form>
+          <input type="search" list="site-sections" placeholder="Search...">
+          <button type="submit">Search</button>
+        </form>
+        <p>Search the site for more information.</p>
+      </search>
+    </header>
+    <hr>
+    <noscript>You don't need javascript for this site. (yet)</noscript>
+    
+    <main>
+      <hgroup>
+        <h1>Welcome to my portfolio site</h1>
+        <p>This is a collection of my projects, blogs and other information about me.</p>
+      </hgroup>
+
+      <section id="about-me">
+        <picture>
+          <source srcset="images/photo.jpg" media="(width >= 800px)">
+          <img src="images/lowresphoto.jpg" alt="A photo of me" width="300" height="300">
+        </picture>
+
+        <h2>Brief description about me:</h2>
+        <p>
+          Hello, I am a rising senior at <span>UCSD</span> studying <b>Math-CS</b>. I love <i>basketball, chess, lifting and piano</i>
+          <br>
+          I want to have a career in <strong>CS</strong> and and I am currently looking for <em>internships</em>.
+        </p>
+      </section>
+
+      <br>
+
+      <aside>
+        <section id="projects-preview">
+          <h2>Projects</h2>
+          <p>Here are some of my projects:</p>
+          <ul>
+            <li><a href="projects.html#connect4">Connect4 AI</a></li>
+            <li><a href="projects.html#tetris">Tetris</a></li>
+          </ul>
+        </section>
+      </aside>
+
+    </main>
+    <hr>
+    <footer>
+      <address>
+        7665 Palmilla Dr, La Jolla
+      </address>
+      <p>Phone number: <a href="tel:+(973)704-8190">+1 (973) 704-8190</a></p>
+      <p>Github: <a href="https://github.com/shashwatdudeja">https://github.com/shashwatdudeja</a></p>
+      <p>&copy; 2023 Shashwat Dudeja</p>
+    </footer>
+  </body>
+</html>
