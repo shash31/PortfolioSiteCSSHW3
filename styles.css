@@ -1,11 +1,3 @@
-custom-element {
-    display: block;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px 0;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -16,6 +8,7 @@ custom-element {
 :root {
     --primary-color: #1dace5;
     --secondary-color: #34ae48;
+
     --main-bg-color: #e9e5e5;
 }
 
@@ -106,6 +99,9 @@ main {
     flex: 1;
     padding: 2rem;
     background-color: var(--main-bg-color);
+}
+
+#home {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
@@ -132,7 +128,31 @@ main {
     }
 }
 
+/* #projects {
+
+}
+
+#blogs {
+
+}
+
+#contact-form {
+
+}
+
+#lab-section {
+
+} */
+
 footer {
     padding: 1.5rem;
     background-color: var(--primary-color);
+}
+
+custom-element {
+    display: block;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
 }
