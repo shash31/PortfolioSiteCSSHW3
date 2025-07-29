@@ -56,7 +56,7 @@
       <p>Alternatively, you can also fill out the form below to send me a message:</p>
 
       <h2>Contact Form</h2>
-      <form action="mailto:shashwatdudeja@gmail.com" method="post">
+      <form action="https://httpbin.org/post" method="post">
         <fieldset>
           <legend>Subject</legend>
 
@@ -65,10 +65,15 @@
 
         </fieldset>
 
+        <input type="hidden" name="possible_bot" value="true">
+
         <fieldset>
           <legend>Your Contact Information</legend>
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required>
+          <br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
           <br>
           <label for="contact-method">Preferred contact method: </label>
           <select id="contact-method" name="contact-method">
@@ -84,9 +89,9 @@
             <option value="Other">Other</option>
           </select>
           <br>
-          <p><strong>Note:</strong> Please provide your contact information in the field below so I could respond to your message.</p>
-          <label for="contact-info">Contact Information:</label>
-          <input type="text" id="contact-info" name="contact-info" required>
+          <p><strong>Note:</strong> Provide any other contact information in the field below</p>
+          <label for="other-contact-info">Other Contact Information:</label>
+          <input type="text" id="other-contact-info" name="other-contact-info" required>
         </fieldset>
 
         <button>Submit</button>
