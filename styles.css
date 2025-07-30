@@ -10,6 +10,9 @@
     --secondary-color: #34ae48;
 
     --main-bg-color: #e9e5e5;
+
+    --text-color: #222;
+    --card-bg: #fff;
 }
 
 body {
@@ -18,6 +21,9 @@ body {
     justify-content: space-between;
     min-height: 100vh;
     gap: 0;
+    
+    color: var(--text-color);
+    background-color: var(--main-bg-color);
 
     font-family: Arial, serif;
     font-size: 15px;
@@ -93,6 +99,89 @@ header {
             }
         }
     }
+
+    
+}
+
+[data-theme="dark"] {
+    --primary-color: #222b38;
+    --secondary-color: #2e7d32;
+    --main-bg-color: #181c20;
+    --text-color: #f3f3f3;
+    --card-bg: #23272e;
+}
+
+#theme-toggle {
+    display: none; 
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+    padding: 0;
+    outline: none;
+}
+
+#theme-toggle .toggle-track {
+    display: inline-block;
+    position: relative;
+    width: 48px;
+    height: 26px;
+    background: #bbb;
+    border-radius: 13px;
+    transition: background 0.2s;
+    vertical-align: middle;
+}
+
+#theme-toggle .toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    transition: left 0.2s, background 0.2s;
+    z-index: 2;
+}
+
+#theme-toggle .toggle-icon {
+    position: absolute;
+    top: 3px;
+    font-size: 18px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+#theme-toggle .toggle-sun {
+    left: 4px;
+    opacity: 1;
+}
+
+#theme-toggle .toggle-moon {
+    right: 4px;
+    opacity: 0.5;
+}
+
+[data-theme="dark"] #theme-toggle .toggle-track {
+    background: #444;
+}
+
+[data-theme="dark"] #theme-toggle .toggle-thumb {
+    left: 25px;
+    background: #23272e;
+}
+
+[data-theme="dark"] #theme-toggle .toggle-sun {
+    opacity: 0.5;
+}
+
+[data-theme="dark"] #theme-toggle .toggle-moon {
+    opacity: 1;
 }
 
 main {
@@ -133,85 +222,113 @@ main {
     flex-direction: column;
     /* align-items: center; */
     padding: 2rem;
-}
 
-#contact-form form {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-    /* max-width: 480px; */
-    /* margin: 2rem auto 0 auto; */
-    margin: 1rem;
-    background: #ffffff;
-    padding: 2rem 2.5rem;
-    border-radius: 1rem;
-}
+    form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        /* max-width: 480px; */
+        /* margin: 2rem auto 0 auto; */
+        margin: 1rem;
+        background: #ffffff;
+        padding: 2rem 2.5rem;
+        border-radius: 1rem;
+    }
 
-#contact-form fieldset {
-    border: none;
-    padding: 0;
-    margin: 0 0 1rem 0;
-    display: grid;
-    /* gap: 0.8rem; */
-}
+    fieldset {
+        border: none;
+        padding: 0;
+        margin: 0 0 1rem 0;
+        display: grid;
+        /* gap: 0.8rem; */
+    }
 
-#contact-form legend {
-    font-weight: bold;
-    margin-bottom: 0.2rem;
-}
+    legend {
+        font-weight: bold;
+        margin-bottom: 0.2rem;
+    }
 
-#contact-form label.required::after {
-    content: " *";
-    color: #e53935;
-    font-weight: bold;
-}
+    label:has(+ *:invalid)::after {
+        content: " *";
+        color: #e53935;
+        font-weight: bold;
+    }
 
-#contact-form input,
-#contact-form textarea,
-#contact-form select {
-    padding: 0.5rem;
-    border: 1px solid #bbb;
-    border-radius: 0.3rem;
-    font-size: 1rem;
-    margin-bottom: 0.2rem;
-    background: #fafbfc;
-}
+    input, textarea, select {
+        padding: 0.5rem;
+        border: 1px solid #bbb;
+        border-radius: 0.3rem;
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+        background: #fafbfc;
+    }
 
-#contact-form button {
-    margin-top: 0.5rem;
-    padding: 0.7rem;
-    background: var(--primary-color);
-    color: #fff;
-    border: none;
-    border-radius: 0.3rem;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.2s;
-}
+    input:focus, textarea:focus, select:focus {
+        border-color: var(--primary-color);
+        outline: none;
+    }
 
-#contact-form button:hover {
-    background: #1789b7;
-}
+    input:user-invalid, textarea:user-invalid {
+        border-color: #e53935;
+        background: #ffeaea;
+    }
 
-#contact-form output {
-    display: block;
-    min-height: 1.2em;
-    margin-top: 0.2rem;
-    font-size: 1rem;
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.3rem;
-}
+    button {
+        margin-top: 0.5rem;
+        padding: 0.7rem;
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 0.3rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
 
-#contact-form #error-message {
-    color: #e53935;
-    background: #ffeaea;
-    border: 1px solid #e53935;
-}
+    button:hover {
+        background: #1789b7;
+    }
 
-#contact-form #info-message {
-    color: #2e7d32;
-    background: #e8f5e9;
-    border: 1px solid #2e7d32;
+    output {
+        display: none;
+        min-height: 1.5rem;
+        margin-top: 0.2rem;
+        font-size: 1rem;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.3rem;
+    }
+
+    #error-message {
+        color: #e53935;
+        background: #ffeaea;
+        border: 1px solid #e53935;
+    }
+
+    #info-message {
+        color: #2e7d32;
+        background: #e8f5e9;
+        border: 1px solid #2e7d32;
+    }
+
+    form:has(input:user-invalid, textarea:user-invalid) {
+        #error-message {
+            display: block;
+        }
+        
+        #info-message {
+            display: none;
+        }
+    }
+
+    form:not(:has(input:invalid)):not(:has(textarea:invalid)) {
+        #error-message {
+            display: none;
+        }
+        
+        #info-message {
+            display: block;
+        }
+    }
 }
 
 /* #projects {

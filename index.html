@@ -8,6 +8,7 @@
     <meta name="author" content="Shashwat Dudeja">
 
     <link rel="stylesheet" href="styles.css">
+    <script src="theme-toggle.js"></script>
     <title>Shash's Portfolio site</title>
   </head>
   <body>
@@ -35,13 +36,23 @@
           <li><a href="">About Me</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="blogs.html">Blogs</a></li>
-          <li><a href="contact.html">Contact Me</a></li>
+          <li><a href="form-with-js.html">Contact Me</a></li>
           <li><a href="htmltags.html">HTML Tags</a></li>
         </ul>
       </nav>
+
+      <button id="theme-toggle" aria-label="Toggle dark mode" >
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+            <span class="toggle-icon toggle-sun" aria-hidden="true"></span>
+            <span class="toggle-icon toggle-moon" aria-hidden="true"></span>
+          </span>
+      </button>
     </header>
 
-    <noscript>You don't need javascript for this site. (yet)</noscript>
+    <noscript>
+      Theme switching requires JavaScript. You are viewing the default light mode.
+    </noscript>
     
     <main id="home">
       <hgroup>
